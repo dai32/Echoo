@@ -9,9 +9,10 @@ import SwiftUI
 
 struct MainTabView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
+    @State private var selectedTab = 0
     
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             // タイムライン画面
             TimelineView()
                 .environmentObject(authViewModel)
@@ -19,14 +20,16 @@ struct MainTabView: View {
                     Image(systemName: "house.fill")
                     Text("タイムライン")
                 }
+                .tag(0)
             
             // 新規投稿画面
-            NewPostView()
+            NewPostView(selectedTab: $selectedTab)
                 .environmentObject(authViewModel)
                 .tabItem {
                     Image(systemName: "plus.circle.fill")
                     Text("投稿")
                 }
+                .tag(1)
             
             // プロフィール画面
             ProfileView()
@@ -35,6 +38,7 @@ struct MainTabView: View {
                     Image(systemName: "person.fill")
                     Text("プロフィール")
                 }
+                .tag(2)
         }
         .accentColor(.blue)
     }
