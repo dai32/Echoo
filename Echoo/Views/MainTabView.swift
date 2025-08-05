@@ -32,8 +32,7 @@ struct MainTabView: View {
                 .tag(1)
             
             // プロフィール画面
-            ProfileView()
-                .environmentObject(authViewModel)
+            NewProfileView()
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text("プロフィール")
