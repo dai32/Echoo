@@ -5,7 +5,7 @@
 //  Created by Kato Daito on 2025/08/05.
 //
 
-import FirebaseFirestoreSwift
+import FirebaseFirestore
 import Firebase
 
 struct Comment: Identifiable, Codable {
