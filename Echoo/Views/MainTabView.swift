@@ -12,43 +12,31 @@ struct MainTabView: View {
     
     var body: some View {
         TabView {
-            // ホーム画面（仮実装）
-            NavigationView {
-                VStack {
-                    Text("ホーム画面")
-                        .font(.largeTitle)
-                    
-                    Button("ログアウト") {
-                        authViewModel.logout()
-                    }
-                    .foregroundColor(.red)
+            // タイムライン画面
+            TimelineView()
+                .environmentObject(authViewModel)
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("タイムライン")
                 }
-                .navigationTitle("Echoo")
-            }
-            .tabItem {
-                Image(systemName: "house")
-                Text("ホーム")
-            }
             
-            // プロフィール画面（仮実装）
-            NavigationView {
-                VStack {
-                    Text("プロフィール画面")
-                        .font(.largeTitle)
-                    
-                    if let email = authViewModel.userSession?.email {
-                        Text("ログイン中: \(email)")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
+            // 新規投稿画面
+            NewPostView()
+                .environmentObject(authViewModel)
+                .tabItem {
+                    Image(systemName: "plus.circle.fill")
+                    Text("投稿")
                 }
-                .navigationTitle("プロフィール")
-            }
-            .tabItem {
-                Image(systemName: "person")
-                Text("プロフィール")
-            }
+            
+            // プロフィール画面
+            ProfileView()
+                .environmentObject(authViewModel)
+                .tabItem {
+                    Image(systemName: "person.fill")
+                    Text("プロフィール")
+                }
         }
+        .accentColor(.blue)
     }
 }
 
